@@ -1,0 +1,13 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    implementation group: 'net.iharder', name: 'base64', version: '2.3.9'
+    implementation group: 'org.json', name:'json', version: '20190722'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileJava.doFirst {
+    file("src/main/resources/jsonkeystoreversion.properties").write("VERSION=${project.version}\n", "UTF-8", false)
+}

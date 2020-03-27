@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    implementation project(':jsonkeystorelib')
+
+    implementation 'info.picocli:picocli:4.2.0'
+    annotationProcessor 'info.picocli:picocli-codegen:4.2.0'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'cz.mormegil.jsonkeystore.tools.KeyStoreConvertProgram'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+compileJava.doFirst {
+    file("src/main/resources/KeyStoreConvertProgram.properties").write("VERSION=${project.version}\n", "UTF-8", false)
+}
+
+compileJava {
+    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+}

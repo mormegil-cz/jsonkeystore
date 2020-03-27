@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+allprojects {
+    group 'cz.mormegil'
+    version '1.0-SNAPSHOT'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    tasks.withType(Javadoc) {
+        options.encoding = 'UTF-8'
+    }
+}
