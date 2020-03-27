@@ -38,10 +38,10 @@ class KeyStoreConvertProgram implements Callable<Integer> {
     @CommandLine.Option(names = {"-t", "--to-format"}, required = true, paramLabel = "FORMAT", description = "Format of the output keystore (JCEKS, JSONKS, ...)")
     String outputFormat;
 
-    @CommandLine.Option(names = {"--storepass"}, arity = "0..1", interactive = true, paramLabel = "PASSWORD", description = "Keystore password to use")
+    @CommandLine.Option(names = {"--storepass"}, arity = "0..1", interactive = true, paramLabel = "PASSWORD", description = "Keystore password to use", defaultValue = "")
     char[] storePassword;
 
-    @CommandLine.Option(names = {"--keypass"}, arity = "0..1", interactive = true, paramLabel = "PASSWORD", description = "Key password to use")
+    @CommandLine.Option(names = {"--keypass"}, arity = "0..1", interactive = true, paramLabel = "PASSWORD", description = "Key password to use", defaultValue = "")
     char[] keyPassword;
 
     /**
