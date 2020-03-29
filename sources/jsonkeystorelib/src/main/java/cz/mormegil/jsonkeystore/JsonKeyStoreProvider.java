@@ -13,8 +13,10 @@ public class JsonKeyStoreProvider extends Provider {
     /**
      * Constructor
      */
+    //Warning suppression: We need to be backward compatible, the better API is @since 9
+    @SuppressWarnings("deprecation")
     public JsonKeyStoreProvider() {
-        super("JsonKeyStoreProvider", VersionInfo.VERSION_NUMBER,
+        super("JsonKeyStoreProvider", VersionInfo.VERSION_NUMBER_FLOAT,
                 "A provider of a simple portable format for keystores called JSONKS");
         putService(new JsonKeyStoreProviderService(this));
     }
