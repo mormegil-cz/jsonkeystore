@@ -35,8 +35,9 @@ public class KeyStoreConvertor {
 
         final KeyStore.PasswordProtection passwordProtection = new KeyStore.PasswordProtection(keyPassword);
         for (final String alias : Collections.list(inputKeyStore.aliases())) {
-            final KeyStore.Entry entry = inputKeyStore.getEntry(alias, passwordProtection);
-            outputKeyStore.setEntry(alias, entry, passwordProtection);
+            final KeyStore.ProtectionParameter entryProtection = inputKeyStore.isCertificateEntry(alias) ? null : passwordProtection;
+            final KeyStore.Entry entry = inputKeyStore.getEntry(alias, entryProtection);
+            outputKeyStore.setEntry(alias, entry, entryProtection);
             // We should copy the creation date here, but there is no public API for all keystores to do that, unfortunately.
         }
 
