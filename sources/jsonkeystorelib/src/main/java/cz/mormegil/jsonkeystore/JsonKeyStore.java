@@ -8,6 +8,7 @@ import org.json.JSONTokener;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -418,6 +419,10 @@ public class JsonKeyStore extends KeyStoreSpi {
         final String algorithm = keyJson.getString("algorithm");
         final String format = keyJson.getString("format");
         final byte[] encoded = Base64.decode(keyJson.getString("encoded"));
+
+        if ("RAW".equals(algorithm) && "RAW".equals(format)) {
+            return new SecretKeySpec(encoded, algorithm);
+        }
 
         final SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(algorithm);
         try {
